@@ -2,6 +2,7 @@ import os
 import vk_tool_core
 import urllib
 import shutil
+import sys
 
 def get_dialogs(access_token, offset = 0, count = 200, return_count = False):
 	method_name = "messages.getDialogs"
@@ -15,15 +16,6 @@ def get_dialogs(access_token, offset = 0, count = 200, return_count = False):
 		return json_data['response']['count']
 
 	return json_data['response']['items']
-
-def get_user_name(access_token, user_id):
-	method_name = "users.get"
-	parameters = {
-				"user_ids": user_id
-	}
-
-	json_data = vk_tool_core.make_vk_request(access_token, method_name, parameters)
-	return json_data['response'][0]['first_name'] + json_data['response'][0]['last_name']
 
 def get_history_images(access_token, dialog_id, count=200):
 	method_name = "messages.getHistoryAttachments"
@@ -61,6 +53,15 @@ def remove_empty_folders():
 		if os.path.isdir(path + "/" + folder):
 			if not len(os.listdir(path + "/" + folder)):
 				shutil.rmtree(path + "/" + folder)
+
+def get_user_name(access_token, user_id):
+	method_name = "users.get"
+	parameters = {
+				"user_ids": user_id
+	}
+
+	json_data = vk_tool_core.make_vk_request(access_token, method_name, parameters)
+	return json_data['response'][0]['first_name'] + json_data['response'][0]['last_name']
 
 if __name__ == "__main__":
 	access_token = vk_tool_core.get_access_token()
