@@ -8,7 +8,6 @@
     Module vk_tool_core.py is base for all other vk_tools scripts. it's used 
     vk api methods (https://vk.com/dev/methods) to get some data from vk social 
     network (www.vk.com).
-
 """
 
 import os
@@ -92,7 +91,6 @@ def make_vk_request(access_token, method_name, parameters):
 
         Returns:
             Json object which corresponds to a vk api method
-
     """
     request_str = re.sub('METHOD_NAME', method_name, base_api_url)
     request_str = re.sub('ACCESS_TOKEN', access_token, request_str)
